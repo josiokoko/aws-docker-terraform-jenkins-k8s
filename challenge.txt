@@ -1,0 +1,34 @@
+(i) How would you deploy Hello.java application to AWS?
+(ii) Describe your build pipeline, including tools used.
+
+Solution:
+	(1) Tools:
+		- AWS ECR
+		- AWS EKS 
+		- Terraform
+		- Docker 
+		- Jenkins 
+
+
+
+	(2) Continous Integration (Code development)
+		- Dockerizing the application
+		- Setting EK`S Cluster
+			- VPC
+			- Subnets (private & public)
+			- Security Groups
+			- Worker nodes (eksctl)
+		- Testing/Quality Checks
+		- VCS - GitHub
+	
+	(3) Continuous Deployment
+		- Jenkins Pipeline
+			- IaC with Terraform
+				- Get (or Create) s3 bucket
+				- Get or create Dynamodb
+			- Create or Get ECR repo
+			- Build docker image
+			- ECR authentication
+			- Deploy image to ECR
+			- Pull the image fro ECR
+			- Deploy EKS cluster
