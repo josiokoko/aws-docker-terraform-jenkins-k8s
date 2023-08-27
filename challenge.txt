@@ -23,6 +23,8 @@ Solution:
 	
 	(3) Continuous Deployment
 		- Jenkins Pipeline
+			- Install AWS credential plugin on Jenkins server
+			- Add aws credentials to Jenkins
 			- IaC with Terraform
 				- Get (or Create) s3 bucket
 				- Get or create Dynamodb
