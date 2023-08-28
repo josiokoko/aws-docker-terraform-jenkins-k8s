@@ -15,16 +15,20 @@ spec:
       resources: {}
       env:
         - name: DOCKER_HOST
-          value: tcp://localhost:2375
+          value: tcp://localhost:2376
+        - name: DOCKER_CERT_PATH
+          value: /certs/client
+        - name: DOCKER_TLS_VERIFY
+          value: "1"
       # volumeMounts:
       #   - name: docker
       #     mountPath: /var/run/docker.sock # We use the k8s host docker engine
     - name: docker-daemon
-      image: docker:19.03.1-dind
+      image: docker:dind
       resources: {}
       env:
         - name: DOCKER_TLS_CERTDIR
-          value: ""
+          value: /certs
       securityContext:
         privileged: true
       volumeMounts:
