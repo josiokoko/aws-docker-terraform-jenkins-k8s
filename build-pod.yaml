@@ -12,10 +12,10 @@ spec:
         - name: dind-certs
           mountPath: /certs/client
       env:
-        - name: DOCKER_TLS_CERTDIR
-          value: /certs
+        # - name: DOCKER_TLS_CERTDIR
+        #   value: /certs
         - name: DOCKER_CERT_PATH
-          value: /certs
+          value: /certs/client
         - name: DOCKER_TLS_VERIFY
           value: 1
         - name: DOCKER_HOST
@@ -33,7 +33,7 @@ spec:
         - name: dind-storage
           mountPath: /var/lib/docker
         - name: dind-certs
-          mountPath: /certs
+          mountPath: /certs/client
   volumes:
     - name: dind-storage
       emptyDir: {}
