@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: javaapp
-        image: ${repository_url}:${BUILD_ID}
+        image: "${repository_url}:${BUILD_ID}"
         ports:
         - containerPort: 3000
       imagePullSecrets:
