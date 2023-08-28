@@ -12,7 +12,11 @@ pipeline {
 		stage("Create S3 Bucket") {
 			steps{
 				script{
-					createS3Bucket('raycoy-aws-deploy-jenkins')
+					withAwsCli( 
+						credentialsId: 'aws-auth', 
+						defaultRegion: ${AWS_DEFAULT_REGION}) {
+							createS3Bucket('raycoy-aws-deploy-jenkins')
+						}
 				}
 			}
 		}
@@ -67,7 +71,7 @@ pipeline {
 		stage("k8s Deployment"){
 			steps {
 				script {
-					withKubeConfig(caCertificate: '', clusterName: 'onyxquity-vvv-pi.k8s.local', contextName: 'onyxquity-vvv-pi.k8s.local', credentialsId: 'jenkins-deployer-credentials', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://api-onyxquity-vvv-pi-k8s--k0kcfg-e7b4ae79bdc3b4da.elb.us-east-1.amazonaws.com') {
+					withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'jenkins-deployer-credentials', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://api-onyxquity-vvv-pi-k8s--k0kcfg-e7b4ae79bdc3b4da.elb.us-east-1.amazonaws.com') {
 						sh returnStatus: true, script: 'kubectl create secret docker-registry regcred --docker-server=${registry_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password)'
 						// --namespace=$NAMESPACE_NAME || true && \
 					
