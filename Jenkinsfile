@@ -64,7 +64,7 @@ pipeline {
 
 		stage("AWS ECR Authentication") {
 			steps{
-				container('docker-client') {
+				container('custom-agent') {
 					sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${registry_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 				}
 			}
