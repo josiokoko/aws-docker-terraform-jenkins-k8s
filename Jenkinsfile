@@ -1,9 +1,11 @@
 pipeline {
 	agent {
-		label 'jenkins-agent'
-		idleMinutes 5
-		yamlFile 'build-pod.yaml'
-		defaultContainer 'custom-agent'
+		kubernetes {
+			label 'jenkins-agent'
+			idleMinutes 5
+			yamlFile 'build-pod.yaml'
+			defaultContainer 'custom-agent'
+		}
 	}
 
 	environment {
