@@ -8,21 +8,21 @@ spec:
       image: josiokoko/onyxquity-inbound-agent
       command: ["tail", "-f", "/dev/null"]
       resources: {}
-    - name: docker-client
-      image: docker:19.03.1
-      # command: ['sleep', '99d']
-      command: ["tail", "-f", "/dev/null"] # this or any command that is bascially a noop is required, this is so that you don't overwrite the entrypoint of the base container
-      resources: {}
       env:
-        - name: DOCKER_HOST
-          value: tcp://localhost:2376
-        - name: DOCKER_CERT_PATH
-          value: /certs/client
-        - name: DOCKER_TLS_VERIFY
-          value: "1"
-      # volumeMounts:
-      #   - name: docker
-      #     mountPath: /var/run/docker.sock # We use the k8s host docker engine
+      - name: DOCKER_HOST
+        value: tcp://localhost:2375
+    # - name: docker-client
+    #   image: docker:19.03.1
+    #   # command: ['sleep', '99d']
+    #   command: ["tail", "-f", "/dev/null"] # this or any command that is bascially a noop is required, this is so that you don't overwrite the entrypoint of the base container
+    #   resources: {}
+    #   env:
+    #     - name: DOCKER_HOST
+    #       value: tcp://localhost:2376
+    #     - name: DOCKER_CERT_PATH
+    #       value: /certs/client
+    #     - name: DOCKER_TLS_VERIFY
+    #       value: "1"
     - name: docker-daemon
       image: docker:dind
       resources: {}
@@ -32,14 +32,16 @@ spec:
       securityContext:
         privileged: true
       volumeMounts:
-          - name: cache
-            mountPath: /var/lib/docker
+        - name: dind-storage
+          mountPath: /var/lib/docker
   volumes:
-    - name: cache
-      hostPath:
-        path: /tmp
-        type: Directory
-    # - name: docker
+    - name: dind-storage
+      emptyDir: {}
+    # - name: cache
     #   hostPath:
-    #     path: /var/run/docker.sock
+    #     path: /tmp
+    #     type: Directory
+    # # - name: docker
+    # #   hostPath:
+    # #     path: /var/run/docker.sock
       
