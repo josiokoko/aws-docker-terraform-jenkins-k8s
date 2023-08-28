@@ -12,11 +12,7 @@ pipeline {
 		stage("Create S3 Bucket") {
 			steps{
 				script{
-					withAwsCli( 
-						credentialsId: 'aws-auth', 
-						defaultRegion: ${AWS_DEFAULT_REGION}) {
-							createS3Bucket('raycoy-aws-deploy-jenkins')
-						}
+					createS3Bucket('raycoy-aws-deploy-jenkins')
 				}
 			}
 		}
