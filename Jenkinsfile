@@ -9,11 +9,11 @@ pipeline {
 
 	stages {
 
-		stage("checkout"){
-			steps{
-				sh "checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiokoko/aws-docker-terraform-jenkins-k8s.git']])"
-			}
-		}
+		// stage("checkout"){
+		// 	steps{
+		// 		sh "checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiokoko/aws-docker-terraform-jenkins-k8s.git']])"
+		// 	}
+		// }
 
 		stage("Create S3 Bucket") {
 			steps{
