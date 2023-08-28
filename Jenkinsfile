@@ -1,5 +1,10 @@
 pipeline {
-	agent any
+	agent {
+		label 'jenkins-agent'
+		idleMinutes 5
+		yamlFile 'build-pod.yaml'
+		defaultContainer 'custom-agent'
+	}
 
 	environment {
 		PATH = "${PATH}:${getTerraformPath()}"
