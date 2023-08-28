@@ -50,6 +50,7 @@ pipeline {
 			steps{
 				dir('terraform/ecr_registry') {
                     sh "pwd"
+					sh "terraform init"
                     sh "terraform init -upgrade"
                     sh "terraform apply -auto-approve -var-file=dev.tfvars"
                     script{
