@@ -9,6 +9,12 @@ pipeline {
 
 	stages {
 
+		stage("checkout"){
+			steps{
+				sh "git branch: 'main', url: 'https://github.com/josiokoko/aws-docker-terraform-jenkins-k8s.git'"
+			}
+		}
+
 		stage("Create S3 Bucket") {
 			steps{
 				script{
