@@ -11,7 +11,7 @@ pipeline {
 
 		stage("checkout"){
 			steps{
-				sh "git branch: 'main', url: 'https://github.com/josiokoko/aws-docker-terraform-jenkins-k8s.git'"
+				sh "checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/josiokoko/aws-docker-terraform-jenkins-k8s.git']])"
 			}
 		}
 
